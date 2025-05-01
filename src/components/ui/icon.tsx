@@ -1,27 +1,15 @@
 
-import * as React from "react"
-import * as LucideIcons from "lucide-react"
+import React from "react"
+import { LucideProps, icons } from "lucide-react"
 
-export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
-  name: keyof typeof LucideIcons
-  size?: number
-  color?: string
-  strokeWidth?: number
-  fallback?: keyof typeof LucideIcons
+export interface IconProps extends LucideProps {
+  name: keyof typeof icons
+  fallback?: keyof typeof icons
 }
 
-const Icon = React.forwardRef<HTMLDivElement, IconProps>(
-  ({ name, size = 24, color, strokeWidth = 2, fallback = "CircleAlert", ...props }, ref) => {
-    const LucideIcon = LucideIcons[name] || LucideIcons[fallback]
-    
-    return (
-      <div ref={ref} {...props}>
-        <LucideIcon size={size} color={color} strokeWidth={strokeWidth} />
-      </div>
-    )
-  }
-)
-
-Icon.displayName = "Icon"
+const Icon = ({ name, fallback = "CircleAlert", ...props }: IconProps) => {
+  const LucideIcon = icons[name] || icons[fallback]
+  return <LucideIcon {...props} />
+}
 
 export default Icon

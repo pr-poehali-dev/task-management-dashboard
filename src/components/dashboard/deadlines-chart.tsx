@@ -34,10 +34,10 @@ export function DeadlinesChart({ tasks }: DeadlinesChartProps) {
   ];
 
   return (
-    <div className="rounded-lg border bg-card text-card-foreground p-6">
+    <div className="rounded-lg border bg-white p-6">
       <div className="space-y-1">
         <h3 className="text-lg font-medium">Горящие сроки</h3>
-        <p className="text-sm text-muted-foreground">Распределение задач по срокам выполнения</p>
+        <p className="text-sm text-gray-500">Распределение задач по срокам выполнения</p>
       </div>
       <div className="mt-4 h-60">
         <ResponsiveContainer width="100%" height="100%">

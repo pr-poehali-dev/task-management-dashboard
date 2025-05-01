@@ -27,19 +27,19 @@ export default function Dashboard() {
             title="Завершено"
             count={completedTasks}
             description="задач выполнено"
-            icon={<Icon name="CheckCircle" className="text-green-500" />}
+            icon={<Icon name="CheckCircle" className="text-green-500" size={24} />}
           />
           <StatusCard
             title="В процессе"
             count={inProgressTasks}
             description="задач выполняются"
-            icon={<Icon name="Clock" className="text-orange-500" />}
+            icon={<Icon name="Clock" className="text-orange-500" size={24} />}
           />
           <StatusCard
             title="Новые"
             count={newTasks}
             description="задач не начаты"
-            icon={<Icon name="ListTodo" className="text-blue-500" />}
+            icon={<Icon name="ListTodo" className="text-blue-500" size={24} />}
           />
         </div>
         

@@ -32,8 +32,8 @@ export function TaskCard({ task }: TaskCardProps) {
       </div>
       
       <div className="flex mt-4 space-x-2">
-        <Button variant="outline" size="sm" className="flex items-center gap-1">
-          <Icon name="Check" size={16} />
+        <Button variant="outline" size="sm" className="text-sm">
+          <Icon name="Check" size={16} className="mr-1" />
           Изменить статус
         </Button>
         <Button variant="ghost" size="icon">

@@ -8,11 +8,11 @@ export default function Settings() {
       <main className="container py-6">
         <div className="mb-6">
           <h1 className="text-3xl font-bold">Настройки</h1>
-          <p className="text-gray-500">Управление настройками профиля и системы</p>
+          <p className="text-gray-500">Управление настройками приложения</p>
         </div>
         
-        <div className="rounded-lg border bg-white p-6">
-          <p className="text-gray-500">Страница настроек находится в разработке.</p>
+        <div className="bg-white p-6 rounded-lg border">
+          <h2 className="text-lg font-medium">Настройки будут доступны в ближайшее время</h2>
         </div>
       </main>
     </div>

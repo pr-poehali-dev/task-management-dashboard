@@ -1,75 +1,58 @@
 
 import { useState } from "react"
 import { Header } from "@/components/layout/header"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import Icon from "@/components/ui/icon"
 import { TaskCard } from "@/components/tasks/task-card"
-import { tasks as allTasks, TaskStatus, TaskPriority } from "@/lib/utils"
+import { Input } from "@/components/ui/input"
+import { tasks } from "@/lib/utils"
+import Icon from "@/components/ui/icon"
 
 export default function Tasks() {
-  const [search, setSearch] = useState("")
-  const [statusFilter, setStatusFilter] = useState<string>("Все статусы")
-  const [priorityFilter, setPriorityFilter] = useState<string>("Все приоритеты")
-  
-  const filteredTasks = allTasks.filter(task => {
-    const matchesSearch = task.title.toLowerCase().includes(search.toLowerCase()) || 
-                          task.description.toLowerCase().includes(search.toLowerCase())
-    const matchesStatus = statusFilter === "Все статусы" || task.status === statusFilter
-    const matchesPriority = priorityFilter === "Все приоритеты" || task.priority === priorityFilter
-    
-    return matchesSearch && matchesStatus && matchesPriority
-  })
-  
+  const [searchQuery, setSearchQuery] = useState("")
+  const filteredTasks = tasks.filter(task => 
+    task.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    task.description.toLowerCase().includes(searchQuery.toLowerCase())
+  )
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
       <main className="container py-6">
-        <div className="flex justify-between items-center mb-6">
-          <div>
-            <h1 className="text-3xl font-bold">Мои задачи</h1>
-            <p className="text-gray-500">Управляйте своими задачами, отслеживайте прогресс и достигайте целей</p>
-          </div>
-          <Button className="bg-blue-900 hover:bg-blue-800">
-            <Icon name="Plus" size={18} className="mr-1" />
-            Добавить задачу
-          </Button>
+        <div className="mb-6">
+          <h1 className="text-3xl font-bold">Мои задачи</h1>
+          <p className="text-gray-500">Управляйте своими задачами, отслеживайте прогресс и достигайте целей</p>
         </div>
-        
+
         <div className="flex flex-col md:flex-row gap-4 mb-6">
-          <div className="relative flex-1">
-            <Input
-              placeholder="Поиск задач..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="pl-10"
-            />
-            <Icon 
-              name="Search" 
-              size={18} 
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" 
-            />
+          <div className="w-full md:w-2/3">
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <Icon name="Search" className="text-gray-400" size={20} />
+              </div>
+              <Input
+                type="search"
+                placeholder="Поиск задач..."
+                className="pl-10 py-3 bg-white"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
           </div>
-          <div className="flex gap-4">
-            <Button 
-              variant="outline" 
-              className="flex items-center gap-2 min-w-[150px] justify-between"
-              onClick={() => setStatusFilter("Все статусы")}
-            >
-              {statusFilter}
-              <Icon name="ChevronDown" size={16} />
-            </Button>
-            <Button 
-              variant="outline" 
-              className="flex items-center gap-2 min-w-[150px] justify-between"
-              onClick={() => setPriorityFilter("Все приоритеты")}
-            >
-              {priorityFilter}
-              <Icon name="ChevronDown" size={16} />
-            </Button>
+          <div className="flex gap-4 w-full md:w-1/3">
+            <select className="w-full bg-white border border-gray-200 rounded-md px-3 py-2 text-sm">
+              <option>Все статусы</option>
+              <option>Новая</option>
+              <option>В процессе</option>
+              <option>Завершена</option>
+            </select>
+            <select className="w-full bg-white border border-gray-200 rounded-md px-3 py-2 text-sm">
+              <option>Все приоритеты</option>
+              <option>Высокий</option>
+              <option>Средний</option>
+              <option>Низкий</option>
+            </select>
           </div>
         </div>
-        
+
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredTasks.map(task => (
             <TaskCard key={task.id} task={task} />
