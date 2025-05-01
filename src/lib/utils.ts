@@ -15,45 +15,46 @@ export interface Task {
   deadline: string
 }
 
-export function getPriorityColor(priority: string) {
+export function formatDate(dateString: string): string {
+  const [year, month, day] = dateString.split('-');
+  return `${day}.${month}.${year}`;
+}
+
+export function getPriorityColor(priority: string): string {
   switch (priority) {
     case 'высокий':
-      return 'bg-red-100 text-red-800'
+      return 'bg-red-100 text-red-800';
     case 'средний':
-      return 'bg-yellow-100 text-yellow-800'
+      return 'bg-yellow-100 text-yellow-800';
     case 'низкий':
-      return 'bg-blue-100 text-blue-800'
+      return 'bg-blue-100 text-blue-800';
     default:
-      return 'bg-gray-100 text-gray-800'
+      return 'bg-gray-100 text-gray-800';
   }
 }
 
-export function getStatusBadgeColor(status: string) {
+export function getStatusBadgeColor(status: string): string {
   switch (status) {
     case 'завершена':
-      return 'bg-green-100 text-green-800'
+      return 'bg-green-100 text-green-800';
     case 'в процессе':
-      return 'bg-purple-100 text-purple-800'
+      return 'bg-purple-100 text-purple-800';
     case 'новая':
-      return 'bg-blue-100 text-blue-800'
+      return 'bg-indigo-100 text-indigo-800';
     default:
-      return 'bg-gray-100 text-gray-800'
+      return 'bg-gray-100 text-gray-800';
   }
 }
 
 export function getDaysLeft(deadline: string): number {
-  const deadlineDate = new Date(deadline)
-  const today = new Date()
+  const [year, month, day] = deadline.split('-').map(Number);
+  const deadlineDate = new Date(year, month - 1, day);
   
-  // Сбрасываем время до 00:00:00
-  today.setHours(0, 0, 0, 0)
-  deadlineDate.setHours(0, 0, 0, 0)
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
   
-  // Разница в миллисекундах
-  const diffMs = deadlineDate.getTime() - today.getTime()
-  
-  // Разница в днях
-  return Math.ceil(diffMs / (1000 * 60 * 60 * 24))
+  const diffTime = deadlineDate.getTime() - today.getTime();
+  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 }
 
 // Тестовые данные для задач

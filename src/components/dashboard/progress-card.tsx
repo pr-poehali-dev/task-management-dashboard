@@ -20,13 +20,18 @@ export function ProgressCard({
 }: ProgressCardProps) {
   return (
     <div className="rounded-lg border bg-white p-6">
-      <div className="space-y-1">
-        <h3 className="text-lg font-medium">{title}</h3>
+      <div>
+        <h3 className="text-base font-medium">{title}</h3>
         <p className="text-sm text-gray-500">{description}</p>
       </div>
       
-      <div className="mt-4">
-        <Progress value={percentage} className="h-2 bg-gray-100" indicatorClassName="bg-blue-900" />
+      <div className="mt-6">
+        <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+          <div 
+            className="h-2 bg-blue-900 rounded-full" 
+            style={{ width: `${percentage}%` }}
+          />
+        </div>
         <div className="text-right mt-1 text-sm font-medium">{percentage}%</div>
       </div>
       

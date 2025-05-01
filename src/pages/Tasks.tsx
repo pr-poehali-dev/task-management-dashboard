@@ -5,6 +5,7 @@ import { TaskCard } from "@/components/tasks/task-card"
 import { Input } from "@/components/ui/input"
 import { tasks } from "@/lib/utils"
 import Icon from "@/components/ui/icon"
+import { Button } from "@/components/ui/button"
 
 export default function Tasks() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -23,33 +24,34 @@ export default function Tasks() {
         </div>
 
         <div className="flex flex-col md:flex-row gap-4 mb-6">
-          <div className="w-full md:w-2/3">
+          <div className="w-full md:w-1/2 lg:w-3/5">
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <Icon name="Search" className="text-gray-400" size={20} />
-              </div>
+              <Icon 
+                name="Search" 
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" 
+                size={18}
+              />
               <Input
-                type="search"
                 placeholder="Поиск задач..."
-                className="pl-10 py-3 bg-white"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 py-2 border-gray-200 rounded-md w-full"
               />
             </div>
           </div>
-          <div className="flex gap-4 w-full md:w-1/3">
-            <select className="w-full bg-white border border-gray-200 rounded-md px-3 py-2 text-sm">
-              <option>Все статусы</option>
-              <option>Новая</option>
-              <option>В процессе</option>
-              <option>Завершена</option>
-            </select>
-            <select className="w-full bg-white border border-gray-200 rounded-md px-3 py-2 text-sm">
-              <option>Все приоритеты</option>
-              <option>Высокий</option>
-              <option>Средний</option>
-              <option>Низкий</option>
-            </select>
+          <div className="flex gap-4 w-full md:w-1/2 lg:w-2/5">
+            <div className="relative w-full">
+              <Button variant="outline" className="text-sm w-full justify-between border-gray-200 bg-white">
+                <span>Все статусы</span>
+                <Icon name="ChevronDown" size={16} />
+              </Button>
+            </div>
+            <div className="relative w-full">
+              <Button variant="outline" className="text-sm w-full justify-between border-gray-200 bg-white">
+                <span>Все приоритеты</span>
+                <Icon name="ChevronDown" size={16} />
+              </Button>
+            </div>
           </div>
         </div>
 

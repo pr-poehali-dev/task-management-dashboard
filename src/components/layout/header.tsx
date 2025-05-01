@@ -1,11 +1,13 @@
 
 import { Link } from "react-router-dom"
-import { Button } from "@/components/ui/button"
 import Icon from "@/components/ui/icon"
+import { Button } from "@/components/ui/button"
 
 export function Header() {
+  const isTaskPage = window.location.pathname === '/tasks';
+  
   return (
-    <header className="border-b bg-white">
+    <header className="border-b">
       <div className="container flex h-14 items-center">
         <div className="flex gap-6 md:gap-10">
           <Link to="/" className="text-blue-500 hover:text-blue-600 text-sm">
@@ -19,17 +21,14 @@ export function Header() {
           </Link>
         </div>
         <div className="ml-auto flex items-center gap-2">
-          {window.location.pathname === '/tasks' && (
-            <Button 
-              className="bg-black text-white rounded-md text-sm flex items-center gap-1.5"
-              size="sm"
-            >
-              <Icon name="Plus" size={16} />
+          {isTaskPage && (
+            <Button className="bg-black rounded-md text-white text-sm py-2 px-3 flex items-center gap-1">
+              <Icon name="Plus" size={16} className="mr-1" />
               Добавить задачу
             </Button>
           )}
-          <Button variant="outline" size="icon" className="ml-2">
-            <Icon name="RotateCcw" size={18} />
+          <Button variant="outline" size="icon" className="ml-2 p-2 rounded-md border">
+            <Icon name="RotateCcw" size={16} />
           </Button>
         </div>
       </div>

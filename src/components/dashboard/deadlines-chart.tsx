@@ -24,7 +24,7 @@ export function DeadlinesChart({ tasks }: DeadlinesChartProps) {
     {
       name: 'На этой неделе',
       value: weekTasks,
-      color: '#eab308' // желтый
+      color: '#f97316' // оранжевый
     },
     {
       name: 'Позже',
@@ -35,29 +35,29 @@ export function DeadlinesChart({ tasks }: DeadlinesChartProps) {
 
   return (
     <div className="rounded-lg border bg-white p-6">
-      <div className="space-y-1">
-        <h3 className="text-lg font-medium">Горящие сроки</h3>
+      <div>
+        <h3 className="text-base font-medium">Горящие сроки</h3>
         <p className="text-sm text-gray-500">Распределение задач по срокам выполнения</p>
       </div>
-      <div className="mt-4 h-60">
+      <div className="mt-4 h-64">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             layout="vertical"
             data={data}
             margin={{
-              top: 5,
+              top: 20,
               right: 30,
-              left: 120,
+              left: 20,
               bottom: 5,
             }}
           >
             <XAxis type="number" />
-            <YAxis type="category" dataKey="name" tick={{ fontSize: 12 }} width={120} />
+            <YAxis type="category" dataKey="name" tick={{ fontSize: 12 }} />
             <Tooltip
               formatter={(value) => [`${value} задач`, '']}
               labelFormatter={(label) => `Срок: ${label}`}
             />
-            <Bar dataKey="value" minPointSize={2} radius={[0, 4, 4, 0]}>
+            <Bar dataKey="value" radius={[0, 4, 4, 0]}>
               {data.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.color} />
               ))}
@@ -65,19 +65,14 @@ export function DeadlinesChart({ tasks }: DeadlinesChartProps) {
           </BarChart>
         </ResponsiveContainer>
       </div>
-      <div className="mt-4 flex items-center justify-center gap-4">
-        <div className="flex items-center gap-2">
-          <div className="h-3 w-3 rounded-full bg-red-500" />
-          <span className="text-sm">Сегодня-завтра</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="h-3 w-3 rounded-full bg-yellow-500" />
-          <span className="text-sm">На этой неделе</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="h-3 w-3 rounded-full bg-blue-500" />
-          <span className="text-sm">Позже</span>
-        </div>
+      <div className="mt-4 flex flex-col space-y-2">
+        {data.map((item, index) => (
+          <div key={index} className="flex items-center">
+            <div className="h-3 w-3 rounded-full mr-2" style={{ backgroundColor: item.color }} />
+            <span className="text-sm mr-auto">{item.name}</span>
+            <span className="text-sm">{33}%</span>
+          </div>
+        ))}
       </div>
     </div>
   );

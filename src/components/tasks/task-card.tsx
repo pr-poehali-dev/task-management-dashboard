@@ -4,7 +4,8 @@ import Icon from "@/components/ui/icon"
 import { 
   Task, 
   getPriorityColor, 
-  getStatusBadgeColor 
+  getStatusBadgeColor,
+  formatDate
 } from "@/lib/utils"
 
 interface TaskCardProps {
@@ -23,24 +24,24 @@ export function TaskCard({ task }: TaskCardProps) {
         </span>
       </div>
       
-      <h3 className="text-lg font-medium">{task.title}</h3>
+      <h3 className="text-lg font-medium mt-2">{task.title}</h3>
       <p className="text-sm text-gray-600 mt-1">{task.description}</p>
       
       <div className="flex items-center mt-4 text-sm text-gray-500">
-        <Icon name="Clock" size={16} />
-        <span className="ml-1">до {task.deadline}</span>
+        <Icon name="Clock" size={14} className="mr-1" />
+        <span>до {formatDate(task.deadline)}</span>
       </div>
       
       <div className="flex mt-4 space-x-2">
-        <Button variant="outline" size="sm" className="text-sm">
-          <Icon name="Check" size={16} className="mr-1" />
+        <Button variant="outline" size="sm" className="text-sm flex items-center rounded px-3 py-1.5 border">
+          <Icon name="Check" size={14} className="mr-1" />
           Изменить статус
         </Button>
-        <Button variant="ghost" size="icon">
-          <Icon name="Pencil" size={16} />
+        <Button variant="ghost" size="sm" className="rounded p-1.5 border">
+          <Icon name="Pencil" size={14} />
         </Button>
-        <Button variant="ghost" size="icon">
-          <Icon name="Trash" size={16} />
+        <Button variant="ghost" size="sm" className="rounded p-1.5 border">
+          <Icon name="Trash" size={14} />
         </Button>
       </div>
     </div>
