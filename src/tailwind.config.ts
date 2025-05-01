@@ -45,14 +45,18 @@ const config = {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        status: {
+          'high': '#FF6B6B',
+          'medium': '#FFD166',
+          'low': '#4CB9E7',
+          'completed': '#59CE8F',
+          'in-progress': '#9b87f5',
+          'new': '#7371FC',
+        }
       },
       borderRadius: {
         lg: "var(--radius)",

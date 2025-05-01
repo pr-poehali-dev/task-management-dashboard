@@ -1,28 +1,27 @@
-import React from 'react';
-import * as LucideIcons from 'lucide-react';
-import { LucideProps } from 'lucide-react';
 
-interface IconProps extends LucideProps {
-  name: string;
-  fallback?: string;
+import * as React from "react"
+import * as LucideIcons from "lucide-react"
+
+export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
+  name: keyof typeof LucideIcons
+  size?: number
+  color?: string
+  strokeWidth?: number
+  fallback?: keyof typeof LucideIcons
 }
 
-const Icon: React.FC<IconProps> = ({ name, fallback = 'CircleAlert', ...props }) => {
-  const IconComponent = (LucideIcons as Record<string, React.FC<LucideProps>>)[name];
-
-  if (!IconComponent) {
-    // Если иконка не найдена, используем fallback иконку
-    const FallbackIcon = (LucideIcons as Record<string, React.FC<LucideProps>>)[fallback];
-
-    // Если даже fallback не найден, возвращаем пустой span
-    if (!FallbackIcon) {
-      return <span className="text-xs text-gray-400">[icon]</span>;
-    }
-
-    return <FallbackIcon {...props} />;
+const Icon = React.forwardRef<HTMLDivElement, IconProps>(
+  ({ name, size = 24, color, strokeWidth = 2, fallback = "CircleAlert", ...props }, ref) => {
+    const LucideIcon = LucideIcons[name] || LucideIcons[fallback]
+    
+    return (
+      <div ref={ref} {...props}>
+        <LucideIcon size={size} color={color} strokeWidth={strokeWidth} />
+      </div>
+    )
   }
+)
 
-  return <IconComponent {...props} />;
-};
+Icon.displayName = "Icon"
 
-export default Icon;
+export default Icon
